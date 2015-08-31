@@ -32,6 +32,6 @@
     "protractor": "protractor e2e-tests/protractor.conf.js",
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\"",
     "clean": "rm -rf dist/",
-    "maven-deploy": "npm version patch && mkdir -p dist && cp -R app/* dist/ && ./maven.js"
+    "maven-deploy": "npm version patch && mkdir -p dist && cp README.md /tmp/README && jar cvf dist/$npm_package_name-$npm_package_version-javadoc.jar -C /tmp README && jar cvf dist/$npm_package_name-$npm_package_version-sources.jar -C /tmp README && cp -R app/* dist/ && ./maven.js"
   }
 }
