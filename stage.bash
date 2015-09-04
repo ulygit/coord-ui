@@ -42,16 +42,16 @@ function step() {
 
 echo "Begin staging" > ${logfile}
 
-step "On master branch" test "master" = "$(git rev-parse --abbrev-ref HEAD)"
-step "Uncommitted files" test -z "$(git status --porcelain)"
-step "Up-to-date" test -z "$(git fetch origin; git log HEAD..origin/master --oneline)"
-step "Pushes pending" test -z "$(git rev-list -n 1 HEAD@{upstream}..HEAD)"
+step "On master branch" eval 'test "master" = "$(git rev-parse --abbrev-ref HEAD)"'
+step "Uncommitted files" eval 'test -z "$(git status --porcelain)"'
+step "Up-to-date" eval 'test -z "$(git fetch origin; git log HEAD..origin/master --oneline)"'
+step "Pushes pending" eval 'test -z "$(git rev-list -n 1 HEAD@{upstream}..HEAD)"'
 step "Build artifact" grunt default package
 
 githash=$(git rev-parse HEAD)
 tagged_artifact=${tmpfolder}/${githash}.zip
-tagged_artifact_basename=$(basename "$tagged_artifact")
+tagged_artifact_basename=$(basename "$tagged_artifact" .zip)
 
 step "Tag artifact" cp $artifact $tagged_artifact
 step "Upload" scp $tagged_artifact ${remote_destination}:
-#step "Stage" ssh ${remote_destination} "source ~/.bash_profile; deploy.sh ${tagged_artifact_basename}"
+step "Stage" ssh ${remote_destination} "source ~/.bash_profile; stage ${tagged_artifact_basename} private_html/jstest.bfjournal.com"
