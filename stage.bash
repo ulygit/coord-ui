@@ -1,3 +1,4 @@
+logfile=${0}.log
 artifact=dist/app.zip
 tmpfolder=/tmp
 remote_destination=bfjourna@bfjournal.com
@@ -6,26 +7,40 @@ red=$(tput setaf 1);
 green=$(tput setaf 2);
 reset=$(tput sgr0);
 
+red=$(tput setaf 1);
+green=$(tput setaf 2);
+bold=$(tput bold);
+reset=$(tput sgr0);
+
+function echoerr() {
+	cat <<< "$@" 1>&2;
+}
+
 function green() {
-	echo "${green}${@}${reset}";
+        echo "${green}${@}${reset}";
 }
 
 function red() {
-	echo "${red}${@}${reset}";
+        echo "${red}${@}${reset}";
 }
 
 function step() {
-	printf "${1}: ";
-	echo "${@:2}" >> stage.log
-	if "${@:2}" 2>&1 >> stage.log; then
-		green "OK";
-	else
-		red "FAILED";
-		exit 1;
-	fi
+        printf "${1}: ";
+        echo "${bold}Command:${reset} ${@:2}" >> $logfile
+        if "${@:2}" >> $logfile 2>&1; then
+                green "OK";
+        else
+                red "FAILED";
+                echo "Printing last few lines of ${logfile}:"
+                echo
+                tail $logfile | sed 's=^=    =g'
+                echo
+                echo "See ${logfile} for full execution output"
+                exit 1;
+        fi
 }
 
-echo "Begin staging" > stage.log
+echo "Begin staging" > ${logfile}
 
 step "On master branch" test "master" = "$(git rev-parse --abbrev-ref HEAD)"
 step "Uncommitted files" test -z "$(git status --porcelain)"
