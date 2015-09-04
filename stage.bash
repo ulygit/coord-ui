@@ -54,4 +54,4 @@ tagged_artifact_basename=$(basename "$tagged_artifact" .zip)
 
 step "Tag artifact" cp $artifact $tagged_artifact
 step "Upload" scp $tagged_artifact ${remote_destination}:
-step "Stage" ssh ${remote_destination} "source ~/.bash_profile; stage ${tagged_artifact_basename} private_html/jstest.bfjournal.com"
+step "Stage" ssh ${remote_destination} "source ~/.bash_profile; stage ${tagged_artifact_basename}"
