@@ -391,7 +391,7 @@ module.exports = function (grunt) {
 					{
 						expand: true,
 						cwd: '<%= yeoman.dist %>',
-						src: [ '**/*', "!<%= yeoman.app %>.zip" ]
+						src: [ '.htaccess', '**/*', "!<%= yeoman.app %>.zip" ]
 					}
 				]
 		  }
