@@ -1,4 +1,3 @@
-// Generated on 2015-09-02 using generator-angular 0.12.1
 'use strict';
 
 // # Globbing
@@ -11,6 +10,9 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+	// Required for livereload to support html5
+	var modRewrite = require('connect-modrewrite');
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
@@ -81,6 +83,7 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+							modRewrite(['^[^\\.]*$ /index.html [L]']),
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -146,8 +149,7 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*'
+            '<%= yeoman.dist %>',
           ]
         }]
       },

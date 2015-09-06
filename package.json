@@ -7,6 +7,7 @@
   "license": "GPL-2.0",
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
+    "connect-modrewrite": "^0.8.2",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-concurrent": "^1.0.0",
@@ -34,10 +35,10 @@
     "http-server": "^0.6.1",
     "jit-grunt": "^0.9.1",
     "jshint-stylish": "^1.0.0",
-    "karma-jasmine": "*",
-    "karma-phantomjs-launcher": "*",
     "karma-chrome-launcher": "^0.1.12",
     "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "*",
+    "karma-phantomjs-launcher": "*",
     "karma-safari-launcher": "^0.1.1",
     "protractor": "^2.2.0",
     "time-grunt": "^1.0.0"

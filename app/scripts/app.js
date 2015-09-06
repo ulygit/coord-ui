@@ -16,22 +16,25 @@ angular
     'ngResource',
     'ngRoute'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
+		$locationProvider
+			.html5Mode(true);
+
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/coord.html',
+        controller: 'CoordCtrl',
+        controllerAs: 'coord'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/coord', {
-        templateUrl: 'views/coord.html',
-        controller: 'CoordCtrl',
-        controllerAs: 'coord'
+      .when('/main', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
       })
       .otherwise({
         redirectTo: '/'
