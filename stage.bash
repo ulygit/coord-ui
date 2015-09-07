@@ -1,4 +1,4 @@
-logfile=${0}.log
+logfile=logs/${0}.log
 artifact=dist/app.zip
 tmpfolder=/tmp
 remote_destination=bfjourna@bfjournal.com
