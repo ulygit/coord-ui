@@ -10,6 +10,7 @@
  */
 angular
   .module('coordApp', [
+    'config',
     'ngAnimate',
     'ngCookies',
     'ngMessages',
@@ -39,4 +40,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+	.controller("FooterCtrl", function ($scope, config) {
+		$scope.config = config;
+	});

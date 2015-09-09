@@ -19,7 +19,8 @@ module.exports = function (grunt) {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
 		protractor: 'grunt-protractor-runner',
-		compress: 'grunt-contrib-compress'
+		compress: 'grunt-contrib-compress',
+		ngconstant: 'grunt-ng-constant',
   });
 
   // Configurable paths for the application
@@ -56,7 +57,8 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:styles', 'postcss']
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+				tasks: ['ngconstant:dev']
       },
       livereload: {
         options: {
@@ -395,7 +397,34 @@ module.exports = function (grunt) {
 					}
 				]
 		  }
-		}
+		},
+
+		ngconstant: {
+			options: {
+				name: 'config',
+				wrap: '"use strict";\n\n{%= __ngModule %}',
+				//space: '  ',
+				constants: {
+					config: grunt.file.readJSON('package.json')
+				},
+			},
+			dev: {
+				options: {
+					dest: '<%= yeoman.app %>/scripts/config.js',
+				},
+				constants: {
+					ENV: 'development'
+				}
+			},
+			prod: {
+				options: {
+					dest: '<%= yeoman.dist %>/scripts/config.js',
+				},
+				constants: {
+					ENV: 'production'
+				}
+			},
+		},
 
   });
 
@@ -426,6 +455,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+		'ngconstant:prod',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

@@ -2,18 +2,18 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('Coord App', function() {
+describe('App', function() {
 
 	beforeEach(function() {
 		browser.get('/');
 	});
 
-	it('Coord app should be on the main page', function() {
+	it('App should be on the main page', function() {
 		expect(element(by.css('h2')).getText()).toEqual('Coord');
 	});
 
-	it('Coord app version should be on the main page', function() {
-		expect(element(by.css('.app-version')).getText()).toEqual('0.0.1');
+	it('App version should be on the main page', function() {
+		expect(element(by.css('.app-version')).getText()).toMatch(/[0-9]+\.[0-9]+\.[0-9]+/);
 	});
 
 	xit('should redirect index.html to index.html#/phones', function() {
