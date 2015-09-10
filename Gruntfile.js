@@ -25,7 +25,9 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
+		root: '.',
     app: require('./bower.json').appPath || 'app',
+		generated: 'app-generated',
     dist: 'dist'
   };
 
@@ -95,7 +97,8 @@ module.exports = function (grunt) {
                 '/app/styles',
                 connect.static('./app/styles')
               ),
-              connect.static(appConfig.app)
+              connect.static(appConfig.app),
+							connect.static(appConfig.generated)
             ];
           }
         }
@@ -111,7 +114,8 @@ module.exports = function (grunt) {
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect.static(appConfig.app)
+              connect.static(appConfig.app),
+							connect.static(appConfig.generated)
             ];
           }
         }
@@ -133,7 +137,8 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '<%= yeoman.generated %>/scripts/{,*/}*.js'
         ]
       },
       test: {
@@ -152,6 +157,7 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>',
+            '<%= yeoman.generated %>',
           ]
         }]
       },
@@ -226,8 +232,9 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
+				root: '<%= yeoman.root %>',
         dest: '<%= yeoman.dist %>',
-        flow: {
+				flow: {
           html: {
             steps: {
               js: ['concat', 'uglifyjs'],
@@ -295,18 +302,30 @@ module.exports = function (grunt) {
       }
     },
 
-    ngtemplates: {
-      dist: {
-        options: {
-          module: 'coordApp',
-          htmlmin: '<%= htmlmin.dist.options %>',
-          usemin: 'scripts/scripts.js'
-        },
-        cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
-        dest: '.tmp/templateCache.js'
-      }
-    },
+		ngtemplates: {
+			dist: {
+				//main: {
+					options: {
+						module: 'coordApp',
+						htmlmin: '<%= htmlmin.dist.options %>',
+						usemin: 'scripts/scripts.js'
+					},
+					cwd: '<%= yeoman.app %>',
+					src: 'views/{,*/}*.html',
+					dest: '.tmp/templateCache.js'
+//				},
+//				config: {
+//					options: {
+//						module: 'config',
+//						htmlmin: '<%= htmlmin.dist.options %>',
+//						usemin: 'scripts/config.js'
+//					},
+//					cwd: '<%= yeoman.app %>',
+//					src: 'views/{,*/}*.html',
+//					dest: '.tmp/templateCache.config.js'
+//				}
+			}
+		},
 
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
@@ -407,19 +426,14 @@ module.exports = function (grunt) {
 				constants: {
 					config: grunt.file.readJSON('package.json')
 				},
+				dest: '<%= yeoman.generated %>/scripts/config.js',
 			},
 			dev: {
-				options: {
-					dest: '<%= yeoman.app %>/scripts/config.js',
-				},
 				constants: {
 					ENV: 'development'
 				}
 			},
 			prod: {
-				options: {
-					dest: '<%= yeoman.dist %>/scripts/config.js',
-				},
 				constants: {
 					ENV: 'production'
 				}
