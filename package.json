@@ -1,7 +1,7 @@
 {
   "name": "coord-ui",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Group event scheduling",
   "repository": "https://github.com/ulygit/coord-ui",
   "license": "GPL-2.0",

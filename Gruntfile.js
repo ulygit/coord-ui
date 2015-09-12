@@ -44,7 +44,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.generated %>/scripts/{,*/}*.js', '<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:styles', 'postcss']
       },
       gruntfile: {
-        files: ['Gruntfile.js'],
+        files: ['Gruntfile.js', 'package.json'],
 				tasks: ['ngconstant:dev']
       },
       livereload: {
@@ -453,6 +453,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'postcss:server',
+			'ngconstant:dev',
       'connect:livereload',
       'watch'
     ]);
