@@ -40,7 +40,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
-	.controller("FooterCtrl", function ($scope, config) {
-		$scope.config = config;
-	});
+  });
