@@ -1,29 +1,46 @@
-<h2>Coord</h2>
-<div ng-controller="CoordCtrl as event">
-	<form name="coordForm" novalidate>
-		<input id="eventName" type="text" ng-model="event.name" required placeholder="Enter event name"/>
+<div>
+	<form
+		name="coordForm"
+		novalidate>
+		<input
+		id="eventName"
+		type="text"
+		ng-model="coord.name"
+		required
+		placeholder="Enter event name"/>
 
-		<div ng-form="contactsForm">
-			<table ng-repeat="contact in event.contacts" ng-form="contactForm">
+		<div
+			ng-form="contactsForm">
+			<table
+				ng-repeat="contact in coord.contacts"
+				ng-form="contactForm">
 				<tr>
 					<td>
-						<button type="submit" ng-click="contactsForm.$invalid || event.addElement()"
+						<button
+							type="submit"
+							ng-click="contactsForm.$invalid
+							|| coord.addElement()"
 							ng-show="$last">
 							Add
 						</button>
 					</td>
 					<td>
-						<input name="emailOrPhone" type="email" ng-model="contact.emailOrPhone" required
+						<input
+						name="emailOrPhone"
+						type="email"
+						ng-model="contact.emailOrPhone"
+						required
 						placeholder="Enter contact information"/>
 					</td>
 					<td>
-						<span ng-show="contactForm.emailOrPhone.$touched && contactForm.$dirty && contactForm.$invalid">A valid
-							email address is required.
+						<span
+							ng-show="contactForm.emailOrPhone.$touched && contactForm.$dirty && contactForm.$invalid">
+							A valid	email address is required.
 						</span>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<input type="button" ng-click="event.submitEvent()" value="Invite" ng-disabled="coordForm.$invalid">
+		<input type="button" ng-click="coord.submitEvent()" value="Invite" ng-disabled="coordForm.$invalid">
 	</form>
 </div>
