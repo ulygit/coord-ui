@@ -27,7 +27,7 @@ coord.controller('CoordCtrl', function($http, $scope, config) {
 			'name' : event.name,
 			'contacts' : event.contacts.filter(hasEmailOrPhone).map($scope.classify)
 		};
-		var res = $http.post(config.service.location, dataObj);
+		var res = $http.post(config.service.endpoint, dataObj);
 		console.log(res);
 	};
 

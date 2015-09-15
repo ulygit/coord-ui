@@ -1,2 +1,2 @@
 service:
-  location: http://coord.bfjournal.com/events
+  endpoint: http://coord.bfjournal.com/events

@@ -1,2 +1,2 @@
 service:
-  location: http://localhost:8080/events
+  endpoint: http://localhost:8080/events

@@ -12,7 +12,7 @@ describe('Controller: CoordCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope) {
 		injectedConfig = {
 			service: {
-				location: ''
+				endpoint: ''
 			}
 		};
     CoordCtrl = $controller('CoordCtrl', {
@@ -23,8 +23,8 @@ describe('Controller: CoordCtrl', function () {
   }));
 
   it('should store its injected configuration', function () {
-		injectedConfig.service.location = 'http://service.location';
+		injectedConfig.service.endpoint = 'http://service.endpoint';
 		expect(CoordCtrl.config).toBeDefined();
-		expect(CoordCtrl.config.service.location).toBe(injectedConfig.service.location);
+		expect(CoordCtrl.config.service.endpoint).toBe(injectedConfig.service.endpoint);
   });
 });
