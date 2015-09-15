@@ -6,23 +6,25 @@ describe('Controller: FooterCtrl', function () {
   beforeEach(module('coordApp'));
 
   var FooterCtrl,
-	    injectedConfig;
+	    injectedPkgInfo;
 
   // Initialize the controller
   beforeEach(inject(function ($controller, $rootScope) {
-		injectedConfig = {
+		injectedPkgInfo = {
 			app_version: ''
 		};
+
     FooterCtrl = $controller('FooterCtrl', {
       $scope: $rootScope.$new(),
       // place here mocked dependencies
-			config: injectedConfig
+			pkginfo: injectedPkgInfo,
     });
   }));
 
-  it('should store its injected configuration', function () {
-		injectedConfig.app_version = '2.0.0';
-		expect(FooterCtrl.config).toBeDefined();
-		expect(FooterCtrl.config.app_version).toBe(injectedConfig.app_version);
+  it('should store its injected package info', function () {
+		injectedPkgInfo.app_version = '2.0.0';
+		expect(FooterCtrl.pkginfo).toBeDefined();
+		expect(FooterCtrl.pkginfo.app_version).toBe(injectedPkgInfo.app_version);
   });
+
 });

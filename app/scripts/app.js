@@ -11,8 +11,6 @@
 angular
   .module('coordApp', [
     'config',
-    'ngAnimate',
-    'ngCookies',
     'ngMessages',
     'ngResource',
     'ngRoute'

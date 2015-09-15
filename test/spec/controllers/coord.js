@@ -6,18 +6,25 @@ describe('Controller: CoordCtrl', function () {
   beforeEach(module('coordApp'));
 
   var CoordCtrl,
-    scope;
+		injectedConfig;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
+		injectedConfig = {
+			service: {
+				location: ''
+			}
+		};
     CoordCtrl = $controller('CoordCtrl', {
-      $scope: scope
+      $scope: $rootScope.$new(),
       // place here mocked dependencies
+			config: injectedConfig
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    //expect(CoordCtrl.awesomeThings.length).toBe(3);
+  it('should store its injected configuration', function () {
+		injectedConfig.service.location = 'http://service.location';
+		expect(CoordCtrl.config).toBeDefined();
+		expect(CoordCtrl.config.service.location).toBe(injectedConfig.service.location);
   });
 });

@@ -59,7 +59,7 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:styles', 'postcss']
       },
       gruntfile: {
-        files: ['Gruntfile.js', 'package.json'],
+        files: ['Gruntfile.js', 'package.json', 'config/development.yml'],
 				tasks: ['ngconstant:dev']
       },
       livereload: {
@@ -305,26 +305,14 @@ module.exports = function (grunt) {
 
 		ngtemplates: {
 			dist: {
-				//main: {
-					options: {
-						module: 'coordApp',
-						htmlmin: '<%= htmlmin.dist.options %>',
-						usemin: 'scripts/scripts.js'
-					},
-					cwd: '<%= yeoman.app %>',
-					src: 'views/{,*/}*.html',
-					dest: '.tmp/templateCache.js'
-//				},
-//				config: {
-//					options: {
-//						module: 'config',
-//						htmlmin: '<%= htmlmin.dist.options %>',
-//						usemin: 'scripts/config.js'
-//					},
-//					cwd: '<%= yeoman.app %>',
-//					src: 'views/{,*/}*.html',
-//					dest: '.tmp/templateCache.config.js'
-//				}
+				options: {
+					module: 'coordApp',
+					htmlmin: '<%= htmlmin.dist.options %>',
+					usemin: 'scripts/scripts.js'
+				},
+				cwd: '<%= yeoman.app %>',
+				src: 'views/{,*/}*.html',
+				dest: '.tmp/templateCache.js'
 			}
 		},
 
@@ -425,18 +413,20 @@ module.exports = function (grunt) {
 				wrap: '"use strict";\n\n{%= __ngModule %}',
 				//space: '  ',
 				constants: {
-					config: grunt.file.readJSON('package.json')
+					pkginfo: grunt.file.readJSON('package.json'),
 				},
 				dest: '<%= yeoman.generated %>/scripts/config.js',
 			},
 			dev: {
 				constants: {
-					ENV: 'development'
+					ENV: 'development',
+					config: grunt.file.readYAML('config/development.yml')
 				}
 			},
 			prod: {
 				constants: {
-					ENV: 'production'
+					ENV: 'production',
+					config: grunt.file.readYAML('config/production.yml')
 				}
 			},
 		},

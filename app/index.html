@@ -34,15 +34,13 @@
 
     <div ng-controller="FooterCtrl as footer" class="footer">
       <div class="container">
-				Version: <span class="app-version">{{footer.config.version}}</span>.
+				Version: <span class="app-version" ng-bind="footer.pkginfo.version"></span>
       </div>
     </div>
 
 		<!-- build:js(.) scripts/vendor.js -->
 		<!-- bower:js -->
 		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-animate/angular-animate.js"></script>
-		<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 		<script src="bower_components/angular-messages/angular-messages.js"></script>
 		<script src="bower_components/angular-resource/angular-resource.js"></script>
 		<script src="bower_components/angular-route/angular-route.js"></script>

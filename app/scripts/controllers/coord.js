@@ -2,7 +2,8 @@
 
 var coord = angular.module('coordApp');
 
-coord.controller('CoordCtrl', function($http, $scope) {
+coord.controller('CoordCtrl', function($http, $scope, config) {
+	this.config = config;
 	$scope.classify = function(contact) {
 		contact.type = 'email';
 		var modcontact = {};
@@ -26,7 +27,7 @@ coord.controller('CoordCtrl', function($http, $scope) {
 			'name' : event.name,
 			'contacts' : event.contacts.filter(hasEmailOrPhone).map($scope.classify)
 		};
-		var res = $http.post('http://localhost:8080/events', dataObj);
+		var res = $http.post(config.service.location, dataObj);
 		console.log(res);
 	};
 
