@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coordApp')
-	.controller('CoordCtrl', function($http, $scope, config) {
+	.controller('CoordCtrl', function($http, $scope, $location, config) {
 		$scope.classify = function(contact) {
 			contact.type = 'email';
 			var modcontact = {};
@@ -26,8 +26,11 @@ angular.module('coordApp')
 				'name' : coord.name,
 				'contacts' : coord.contacts.filter(hasEmailOrPhone).map($scope.classify)
 			};
-			var res = $http.post(config.service.endpoint, dataObj);
-			console.log(res);
+			$http.post(config.service.endpoint, dataObj)
+				.then(function(response) {
+					var id = response.headers('Location').split('/').pop();
+					$location.path('event/' + id);
+				});
 		};
 	
 		coord.addElement = function() {

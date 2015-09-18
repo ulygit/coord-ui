@@ -30,7 +30,6 @@ module.exports = function(config) {
       // endbower
       "app/scripts/**/*.js",
       "app-generated/scripts/**/*.js",
-      "test/mock/**/*.js",
       "test/spec/**/*.js"
     ],
 
@@ -39,16 +38,13 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 8081,
 
     // Start these browsers, currently available:
     // - ChromeCanary
     // - Opera
     // - IE (only Windows)
     browsers: [
-      "Chrome",
-      "Safari",
-      "Firefox",
       "PhantomJS"
     ],
 
@@ -56,7 +52,6 @@ module.exports = function(config) {
     plugins: [
       "karma-chrome-launcher",
       "karma-firefox-launcher",
-      "karma-safari-launcher",
       "karma-phantomjs-launcher",
       "karma-jasmine"
     ],

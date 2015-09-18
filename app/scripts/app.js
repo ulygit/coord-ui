@@ -25,6 +25,16 @@ angular
         controller: 'CoordCtrl',
         controllerAs: 'coord'
       })
+      .when('/alt', {
+        templateUrl: 'views/coord2.html',
+        controller: 'CoordCtrl2',
+        controllerAs: 'coord2'
+      })
+      .when('/event/:id', {
+        templateUrl: 'views/event.html',
+        controller: 'EventCtrl',
+        controllerAs: 'event'
+      })
       .otherwise({
         redirectTo: '/'
       });

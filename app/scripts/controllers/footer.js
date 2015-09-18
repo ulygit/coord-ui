@@ -8,7 +8,6 @@
  * Controller of the coordApp
  */
 angular.module('coordApp')
-	.controller("FooterCtrl", function (pkginfo, config) {
+	.controller("FooterCtrl", function (pkginfo) {
 		this.pkginfo = pkginfo;
-		this.config = config;
   });

@@ -1,0 +1,6 @@
+<div>
+	<h3>Event: <span ng-bind="event.evt.name"></span></h3>
+	<ul ng-repeat="contact in event.evt.contacts">
+		<li ng-bind="contact.email === null ? contact.phone : contact.email.address"></li>
+	</ul>
+</div>
