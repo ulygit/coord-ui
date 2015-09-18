@@ -22,12 +22,12 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/coord.html',
-        controller: 'CoordCtrl',
+        controller: 'CoordCtrl2',
         controllerAs: 'coord'
       })
       .when('/alt', {
         templateUrl: 'views/coord2.html',
-        controller: 'CoordCtrl2',
+        controller: 'CoordCtrl',
         controllerAs: 'coord2'
       })
       .when('/event/:id', {

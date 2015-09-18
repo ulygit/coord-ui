@@ -1,35 +1,28 @@
 <div>
-	<form name="coordForm" novalidate>
-
-		<input id="eventName" type="text" ng-model="coord.name" required placeholder="Enter event name"/>
-
-		<div ng-form="contactsForm">
-			<table ng-repeat="contact in coord.contacts" ng-form="contactForm">
-				<tr>
-					<td>
-						<button type="submit" ng-click="contactsForm.$invalid || coord.addElement()" ng-show="$last">
-							Add
-						</button>
-					</td>
-					<td>
-						<input name="emailOrPhone" type="email" ng-model="contact.emailOrPhone" required placeholder="Enter contact information"/>
-					</td>
-					<td>
-						<span ng-show="contactForm.emailOrPhone.$touched && contactForm.$dirty && contactForm.$invalid">
-							A valid	email address is required.
-						</span>
-					</td>
-				</tr>
-			</table>
-		</div>
-
-		<input type="button" ng-click="coord.submitEvent()" value="Invite" ng-disabled="coordForm.$invalid">
-
+	I want to go <input type="text" ng-model="coord.evt.name" placeholder="Skiing" autofocus>
+	<br>
+	<form ng-init="contact = { email: '' }" ng-submit="coord.addContact(contact)">
+		...with <input placeholder="ashley@adomain.com&#9166;" ng-model="contact.email" ng-disabled="saving">
 	</form>
+	<div ng-repeat="contact in coord.evt.contacts | orderBy:'-'">
+		<button ng-click="coord.removeContact(contact)">x</button>
+		<label ng-class="contact.edit ? 'background' : 'foreground'" ng-dblclick="editContact(contact)">{{ contact.email }}</label>
+		<input 
+		ng-class="contact.edit ? 'forefront' : 'background'" 
+		ng-model="contact.email" 
+		ng-blur="saveContact(contact)" 
+		um-enter-key="saveContact(contact)"
+		um-esc-key="revertChanges(contact)"
+		um-focus-when="contact.edit">
+	</div>
+	<button>Woot</button>
+</div>
 
-<br>
+<hr>
 
-	<form>
-		<input>
-	</form>
+<span>JSON object:</span>
+<div>
+	<code>
+		{{ coord.evt | json }}
+	</code>
 </div>

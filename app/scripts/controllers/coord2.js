@@ -1,44 +1,41 @@
 'use strict';
 
 angular.module('coordApp')
-	.controller('CoordCtrl2', function($scope) {
-		var ctrl = this;
-
-		ctrl.evt = { 
-			name: '',
-			contacts: []
-		};
-
-		ctrl.addContact = function(contact) {
-			if ( ! contact || ! contact.email) {
-				return;
+	.controller('CoordCtrl', function($http, $scope, $location, config) {
+		$scope.classify = function(contact) {
+			contact.type = 'email';
+			var modcontact = {};
+			if (contact.type === 'email') {
+				modcontact.email = contact.emailOrPhone;
+			} else if (contact.type === 'phone') {
+				modcontact.phone = contact.emailOrPhone;
 			}
-			var c = angular.copy(contact);
-			ctrl.evt.contacts.push(c);
-			contact.email = '';
+			return modcontact;
 		};
-
-		ctrl.removeContact = function(contact) {
-			var idx = ctrl.evt.contacts.indexOf(contact);
-  		if(idx !== -1) {
-  		  ctrl.evt.contacts.splice(idx,1);
-  		}
+	
+		var coord = this;
+		coord.config = config;
+		coord.name = '';
+		coord.contacts = [{}];
+	
+		coord.submitEvent = function() {
+			var hasEmailOrPhone = function(contact) {
+				return 'emailOrPhone' in contact && contact.emailOrPhone.trim().length !== 0;
+			};
+			var dataObj = {
+				'name' : coord.name,
+				'contacts' : coord.contacts.filter(hasEmailOrPhone).map($scope.classify)
+			};
+			$http.post(config.service.endpoint, dataObj)
+				.then(function(response) {
+					var id = response.headers('Location').split('/').pop();
+					$location.path('event/' + id);
+				});
 		};
-
-		$scope.editContact = function(contact) {
-			contact.originalContact = angular.copy(contact);
-			contact.edit = true;
+	
+		coord.addElement = function() {
+			coord.contacts.push({});
 		};
-
-		$scope.saveContact = function(contact) {
-			delete contact.originalContact;
-			delete contact.edit;
-		};
-
-		$scope.revertChanges = function(contact) {
-			contact.email = contact.originalContact.email;
-			delete contact.originalContact;
-			delete contact.edit;
-		};
-
+	
 	});
+	
