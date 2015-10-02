@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('coordApp')
-	.controller('CoordCtrl2', function($scope) {
+	.controller('CoordCtrl', function($scope, config) {
 		var ctrl = this;
+		ctrl.config = config;
 
 		ctrl.evt = { 
 			name: '',
@@ -26,18 +27,21 @@ angular.module('coordApp')
 		};
 
 		$scope.editContact = function(contact) {
-			contact.originalContact = angular.copy(contact);
+			//contact.originalContact = angular.copy(contact);
 			contact.edit = true;
 		};
 
 		$scope.saveContact = function(contact) {
-			delete contact.originalContact;
+			contact.email = contact.modified;
+			delete contact.modified;
+			//delete contact.originalContact;
 			delete contact.edit;
 		};
 
 		$scope.revertChanges = function(contact) {
-			contact.email = contact.originalContact.email;
-			delete contact.originalContact;
+			//contact.email = contact.originalContact.email;
+			//delete contact.originalContact;
+			delete contact.modified;
 			delete contact.edit;
 		};
 

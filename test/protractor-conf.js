@@ -5,11 +5,19 @@ exports.config = {
     'e2e/*.js'
   ],
 
-  capabilities: {
-    'browserName': 'chrome'
-  },
+//  capabilities: {
+//    'browserName': 'chrome'
+//  },
 
-  chromeOnly: true,
+  multiCapabilities: [{
+//    'browserName': 'firefox'
+//  }, {
+//    'browserName': 'safari'
+//  }, {
+    'browserName': 'chrome'
+  }],
+
+//  chromeOnly: true,
 
   baseUrl: 'http://localhost:9000/',
 

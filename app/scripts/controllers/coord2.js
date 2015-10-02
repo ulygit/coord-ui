@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coordApp')
-	.controller('CoordCtrl', function($http, $scope, $location, config) {
+	.controller('CoordCtrl2', function($http, $scope, $location, config) {
 		$scope.classify = function(contact) {
 			contact.type = 'email';
 			var modcontact = {};

@@ -27,4 +27,5 @@ describe('Controller: CoordCtrl', function () {
 		expect(CoordCtrl.config).toBeDefined();
 		expect(CoordCtrl.config.service.endpoint).toBe(injectedConfig.service.endpoint);
   });
+
 });
